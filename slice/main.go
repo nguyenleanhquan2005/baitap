@@ -2,15 +2,16 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"sort"
+	"strconv"
+	
 )
 
 func main() {
-	slice := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-	var number int = 100
+	slice := []string{"1", "4", "3", "7", "35", "6", "18", "29", "10"}
 	a := []int{100, 120}
-	slice = append(slice, a...)
-	slice = append(slice, number)
-	fmt.Println(slice)
+	
 	fmt.Println(so4("himalaya"))
 	fmt.Println(so4("taj"))
 	fmt.Println(so4("1,2,3,4"))
@@ -28,6 +29,12 @@ func main() {
 	fmt.Println(la)
 	resultat := checkInclude1(22, d)
 	fmt.Println(resultat)
+
+	sorted, err := sortNumbers(slice)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(sorted)
 
 }
 func appendSlice(intSlice []int, number int) []int {
@@ -69,6 +76,24 @@ func checkInclude1(a int, slice []int) bool {
 	return result
 }
 
+
+func sortNumbers(data []string) ([]string, error) {
+	var lastErr error
+	sort.Slice(data, func(i, j int) bool {
+		a, err := strconv.ParseInt(data[i], 10, 64)
+		if err != nil {
+			lastErr = err
+			return false
+		}
+		b, err := strconv.ParseInt(data[j], 10, 64)
+		if err != nil {
+			lastErr = err
+			return false
+		}
+		return a < b
+	})
+	return data, lastErr
+}
 func trim() {
 	var str string = "a this is a string b"
 	fmt.Println("The given string is:\n", str)
@@ -87,7 +112,7 @@ func trim() {
 		}
 	}
 	trimmed := str[left : right+1]
-	fmt.Println("The string obtained after trimming the above string from both sides is:\n", trimmed)
+	return ("The string obtained after trimming the above string from both sides is:\n", trimmed)
 }
 
 //so1 them phan tu vao dau slice
@@ -96,3 +121,4 @@ func trim() {
 //so4 input func string , output chuoi dao nguoc. vi du: "Nguyen" output "neyugN"
 //so5 input slice , output slice dao nguoc. vidu: 3,2,5 output 5,2,3
 //so6 input slice int,n int kiem tra so n co thuoc slice. vidu: n=200, tra ve false. n=3, tra ve true
+//so7 input slice int, output slice int tu nho den lon
