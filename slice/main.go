@@ -10,7 +10,7 @@ import (
 
 func main() {
 	slice := []string{"1", "4", "3", "7", "35", "6", "18", "29", "10"}
-	a := []int{100, 120}
+	a := []int{100, 120,45,65,76,8,23}
 	
 	fmt.Println(so4("himalaya"))
 	fmt.Println(so4("taj"))
@@ -35,6 +35,8 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println(sorted)
+	fmt.Println(BubbleSort(a))
+
 
 }
 func appendSlice(intSlice []int, number int) []int {
@@ -94,28 +96,17 @@ func sortNumbers(data []string) ([]string, error) {
 	})
 	return data, lastErr
 }
-func trim() {
-	var str string = "a this is a string b"
-	fmt.Println("The given string is:\n", str)
-	fmt.Println()
-	var left, right int
-	for i, c := range str {
-		if c != 'a' {
-			left = i
-			break
-		}
-	}
-	for i := len(str) - 1; i >= 0; i-- {
-		if str[i] != 'b' {
-			right = i
-			break
-		}
-	}
-	trimmed := str[left : right+1]
-	return ("The string obtained after trimming the above string from both sides is:\n", trimmed)
+func BubbleSort(array[] int)[]int {
+   for i:=0; i< len(array)-1; i++ {
+      for j:=0; j < len(array)-i-1; j++ {
+         if (array[j] > array[j+1]) {
+            array[j], array[j+1] = array[j+1], array[j]
+         }
+      }
+   }
+   return array
 }
 
-//so1 them phan tu vao dau slice
 //so2 loại bo phan tu 3 cua slice
 //so3 viet func input slice,n output bo phan tu thu n
 //so4 input func string , output chuoi dao nguoc. vi du: "Nguyen" output "neyugN"
